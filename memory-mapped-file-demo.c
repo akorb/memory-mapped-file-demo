@@ -39,6 +39,10 @@ int main()
             memcpy(mapfile, text, strlen(text) - 1); // -1 to remove the newline
             // break; // Left on porpuse to print the new content
         case 'r':
+            // This assumes that mapfile ends with a \0
+            // mmap fills up pages that are not fully used with zeros, so this is normally the case.
+            // But what happens if the size of the given file is an exact multiple of the page size (usually 4096 bytes)?
+            // Hint: Depends what comes behind the mmap'd memory region (the command `pmap` might be helpful)
             printf("%s\n\n", mapfile);
             break;
 
